@@ -2,6 +2,10 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
+  function getPlayerSelection() {
+    return prompt("Rock, paper or scissors?").trim().toLowerCase();
+  } 
+
 function computerPlay() {
     let selectPlay = getRandomInt(3);
 
@@ -14,11 +18,6 @@ function computerPlay() {
             return "scissors";
     }
 }
-
-// function playRound(playerSelection, computerSelection) { 
-
-// }
-
 
 function playRound(playerSelection, computerSelection) { 
     if (playerSelection === "rock") {
@@ -50,6 +49,10 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-const playerSelection = "rock";
+function game() {
+
+}
+
+const playerSelection = getPlayerSelection();
 const computerSelection = computerPlay();
-console.log(playRound(playerSelection, computerSelection))
+console.log(playRound(playerSelection, computerSelection));
