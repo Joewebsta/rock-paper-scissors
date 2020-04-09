@@ -55,24 +55,31 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function showRoundResults() {
+    return `Player score: ${playerWinCount} Computer score: ` + `${computerWinCount}`;
+}
+
+function showGameResults(rounds) {
+    if (playerWinCount > computerWinCount) {
+        return `You've won the best of ${rounds} games! ` + 
+                `Final score - Player: ${playerWinCount} | Computer: ${computerWinCount}`;
+    } else if (playerWinCount === computerWinCount) {
+        return `You tied. Final score - Player: ${playerWinCount} | Computer: ${computerWinCount}`;
+    } else {
+        return `You've lost the best of ${rounds} games. ` + 
+                `Final score - Player: ${playerWinCount} | Computer: ${computerWinCount}`;
+    }
+}
+
 function game(rounds) {
     for (let i = 0; i < rounds; i++) {
         const playerSelection = getPlayerSelection();
         const computerSelection = computerPlay();
+        
         console.log(playRound(playerSelection, computerSelection));
-        console.log(`Player score: ${playerWinCount} Computer score: ` +
-                `${computerWinCount}`);    
+        console.log(showRoundResults());    
     }
-    
-    if (playerWinCount > computerWinCount) {
-        console.warn(`You've won the best of ${rounds} games! ` + 
-                `Final score - Player: ${playerWinCount} | Computer: ${computerWinCount}` )
-    } else if (playerWinCount === computerWinCount) {
-        console.warn(`You tied. Final score - Player: ${playerWinCount} | Computer: ${computerWinCount}`)
-    } else {
-        console.warn(`You've lost the best of ${rounds} games. ` + 
-                `Final score - Player: ${playerWinCount} | Computer: ${computerWinCount}` )
-    }
+    console.warn(showGameResults(rounds));
 }
 
 game(5);
