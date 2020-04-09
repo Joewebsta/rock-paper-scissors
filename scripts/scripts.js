@@ -1,9 +1,8 @@
 let playerWinCount = 0;
 let computerWinCount = 0;
 
-
 function getPlayerSelection() {
-return prompt("Rock, paper or scissors?").trim().toLowerCase();
+return prompt("Rock, paper or scissors? Choose your weapon!").trim().toLowerCase();
 } 
 
 function computerPlay() {
@@ -12,37 +11,44 @@ function computerPlay() {
     return choices[randomNuber];
 }
 
-function playRound(playerSelection, computerSelection) { 
-    switch(playerSelection + computerSelection) {
-        //user chooses rock
-        case "rockrock":
-            return "You tied! Rock nullifies rock!";
-        case "rockpaper":
-            computerWinCount++;
-            return "You lose! Paper beats rock!";
-        case "rockscissors":
-            playerWinCount++;
-            return "You win! Rock beats scissors!";
-        
-            //user chooses paper
-        case "paperrock":
-            playerWinCount++;
-            return "You win! Paper beats rock!";
-        case "paperpaper":
-            return "You tied! Paper nullifies paper!";
-        case "paperscissors":
-            computerWinCount++;
-            return "You lose! Scissors beat rock!";
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
-        //user chooses scissors
-        case "scissorsrock":
-            computerWinCount++;
-            return "You lose! Scissors beats rock!";
+function win(playerSelection, computerSelection) {
+    playerWinCount++;
+    return `You won! ${capitalize(playerSelection)} beats ${computerSelection}!`;
+}
+
+function lose(playerSelection, computerSelection) {
+    computerWinCount++;
+    return `You lost... ${capitalize(playerSelection)} loses to ${computerSelection}.`;
+}
+
+function tie(playerSelection, computerSelection) {
+    return `You tied! ${capitalize(playerSelection)} nullifies ${computerSelection}.`;
+}
+
+function playRound(playerSelection, computerSelection) { 
+    
+    switch(playerSelection + computerSelection) {
+        //user win scenarios
+        case "rockscissors":
+        case "paperrock":
         case "scissorspaper":
-            playerWinCount++;
-            return "You win! Scissors beats paper!";
+            return win(playerSelection, computerSelection);
+
+        //user lose scenarios
+        case "scissorsrock":
+        case "rockpaper":
+        case "paperscissors":
+            return lose(playerSelection, computerSelection);
+
+        //user tie scenarrios
         case "scissorsscissors":
-            return "You tied! Scissors nullfies scissors!";
+        case "rockrock":
+        case "paperpaper":
+            return tie(playerSelection, computerSelection);
     }
 }
 
