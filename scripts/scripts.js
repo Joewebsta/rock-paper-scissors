@@ -1,57 +1,48 @@
 let playerWinCount = 0;
 let computerWinCount = 0;
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-  }
 
-  function getPlayerSelection() {
-    return prompt("Rock, paper or scissors?").trim().toLowerCase();
-  } 
+function getPlayerSelection() {
+return prompt("Rock, paper or scissors?").trim().toLowerCase();
+} 
 
 function computerPlay() {
-    let selectPlay = getRandomInt(3);
-
-    switch (selectPlay) {
-        case 0: return "rock";
-        case 1: return "paper";
-        case 2: return "scissors";
-    }
+    const choices = ["rock", "paper", "scissors"];
+    const randomNuber = Math.floor(Math.random() * 3);
+    return choices[randomNuber];
 }
 
 function playRound(playerSelection, computerSelection) { 
-    if (playerSelection === "rock") {
-        if (computerSelection === "rock") {
-            return "You tied! Rock nullifies rock!"
-        } else if (computerSelection === "paper") {
+    switch(playerSelection + computerSelection) {
+        //user chooses rock
+        case "rockrock":
+            return "You tied! Rock nullifies rock!";
+        case "rockpaper":
             computerWinCount++;
-            return "You lose! Paper beats rock!"
-        } else {
+            return "You lose! Paper beats rock!";
+        case "rockscissors":
             playerWinCount++;
-            return "You win! Rock beats scissors!"
-        }
-    }
-    if (playerSelection === "paper") {
-        if (computerSelection === "rock") {
+            return "You win! Rock beats scissors!";
+        
+            //user chooses paper
+        case "paperrock":
             playerWinCount++;
-            return "You win! Paper beats rock!"
-        } else if (computerSelection === "paper") {
-            return "You tied! Paper nullifies paper!"
-        } else {
+            return "You win! Paper beats rock!";
+        case "paperpaper":
+            return "You tied! Paper nullifies paper!";
+        case "paperscissors":
             computerWinCount++;
-            return "You lose! Scissors beat rock!"
-        }
-    }
-    if (playerSelection === "scissors") {
-        if (computerSelection === "rock") {
+            return "You lose! Scissors beat rock!";
+
+        //user chooses scissors
+        case "scissorsrock":
             computerWinCount++;
-            return "You lose! Scissors beats rock!"
-        } else if (computerSelection === "paper") {
+            return "You lose! Scissors beats rock!";
+        case "scissorspaper":
             playerWinCount++;
-            return "You win! Scissors beats paper!"
-        } else {
-            return "You tied! Scissors nullfies scissors!"
-        }
+            return "You win! Scissors beats paper!";
+        case "scissorsscissors":
+            return "You tied! Scissors nullfies scissors!";
     }
 }
 
