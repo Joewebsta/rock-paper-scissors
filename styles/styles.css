@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+html {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #FBF1E2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+h1 {
+    text-transform: uppercase;
+}
+
+.content {
+    height: 400px;
+    width: 800px;
+    background-color: #392C9C;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.scoreboard {
+    height: 100px;
+    width: 300px;
+    background-color: #fff;
+    border: 2px solid #392C9C;
+    border-radius: 5px;
+    margin-bottom: -51px;
+    z-index: 999;
+    display: flex;
+}

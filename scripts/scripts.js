@@ -86,4 +86,4 @@ function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-game(5);
+// game(5);
