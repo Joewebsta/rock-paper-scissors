@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+/* RED COLOR */
+/* #FE0051 */
+
+
 html {
     font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -16,21 +25,73 @@ h1 {
     text-transform: uppercase;
 }
 
+
+.scoreboard {
+    height: 100px;
+    width: 300px;
+    background-color: #fff;
+    border: 4px solid #351253;
+    border-radius: 5px;
+    margin-bottom: -51px;
+    z-index: 999;
+    display: flex;
+}
+
+.scoreboard-player, .scoreboard-comp {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scoreboard-comp {
+    border-left: 4px solid #351253;
+}
+
+.scoreboard-player p, .scoreboard-comp p{
+    font-size: 50px;
+    font-weight: 900;
+}
+
+.scoreboard-player h2, .scoreboard-comp h2{
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
 .content {
     height: 400px;
     width: 800px;
     background-color: #392C9C;
     align-items: center;
     border-radius: 5px;
+    border: 4px solid #351253;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.scoreboard {
-    height: 100px;
-    width: 300px;
-    background-color: #fff;
-    border: 2px solid #392C9C;
-    border-radius: 5px;
-    margin-bottom: -51px;
-    z-index: 999;
+.messages h1 {
+    text-transform: initial;
+    color: white;
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
+.choices {
     display: flex;
+    
+    /* justify-content: center; */
+}
+
+.choice img {
+    width: 100px;
+    
+}
+
+.choice { 
+    background: #351253;
+    height: 100px;
+    border-radius: 10px;
+    margin: 0 20px;
 }
