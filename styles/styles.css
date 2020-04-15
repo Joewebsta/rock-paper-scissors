@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-/* RED COLOR */
-/* #FE0051 */
-
-
 * {
     font-family: 'Inter', sans-serif;
 }
@@ -20,13 +16,11 @@ body {
     align-items: center;
 }
 
-
 body h1 {
     text-transform: uppercase;
     font-size: 40px;
     color: #392C9C;
 }
-
 
 .scoreboard {
     height: 70px;
@@ -80,9 +74,6 @@ body h1 {
     margin: 0;
 }
 
-
-
-
 .content {
     height: 400px;
     width: 800px;
@@ -102,7 +93,6 @@ body h1 {
     line-height: 1.5em;
     color: white;
     font-size: 40px;
-    /* margin-bottom: 50px; */
 }
 
 .choices {
@@ -113,29 +103,27 @@ body h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.choice:hover {
-    cursor: pointer;
+    margin: 0 20px 10px;
 }
 
 .choice img {
     width: 100px;
     background: #351253;
     border-radius: 10px;
-    margin: 0 20px 10px;
+    transition: all .3s ease;
 }
 
-
-.choice img:hover + p {
-    visibility: visible;
+.choice img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .choice p { 
-    color:  white;
+    color: white;
     text-transform: uppercase;
     font-weight: 500;
-    visibility: hidden;
+    transition: all .5s ease;
+    margin-top: 20px;
 }
 
 .play-again {
