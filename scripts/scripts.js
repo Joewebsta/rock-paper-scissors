@@ -1,22 +1,16 @@
+const message = document.querySelector('.message');
+
 let playerWinCount = 0;
 let computerWinCount = 0;
 
-//Execute n rounds of rock paper scissors
-function game(rounds) {
-    for (let i = 0; i < rounds; i++) {
-        const playerSelection = getPlayerSelection();
-        const computerSelection = computerPlay();
-        
-        console.log(playRound(playerSelection, computerSelection));
-        console.log(showRoundResults());    
-    }
-    console.warn(showGameResults(rounds));
-}
+window.addEventListener('click', (e) => {
+    const playerSelection = e.target.dataset.choice;
+    const computerSelection = computerPlay();
+                    
+    playRound(playerSelection, computerSelection);
+    console.log(showRoundResults());    
+});
 
-//Determine player and computer selections
-function getPlayerSelection() {
-    return prompt("Rock, paper or scissors? Choose your weapon!").trim().toLowerCase();
-} 
 
 function computerPlay() {
     const choices = ["rock", "paper", "scissors"];
@@ -51,16 +45,16 @@ function playRound(playerSelection, computerSelection) {
 //Determine text for individual round results
 function win(playerSelection, computerSelection) {
     playerWinCount++;
-    return `You won! ${capitalize(playerSelection)} beats ${computerSelection}!`;
+    message.innerText = `You won! ${capitalize(playerSelection)} beats ${computerSelection}!`;    
 }
 
 function lose(playerSelection, computerSelection) {
     computerWinCount++;
-    return `You lost... ${capitalize(playerSelection)} loses to ${computerSelection}.`;
+    message.innerText = `You lost... ${capitalize(playerSelection)} loses to ${computerSelection}.`;
 }
 
 function tie(playerSelection, computerSelection) {
-    return `You tied! ${capitalize(playerSelection)} nullifies ${computerSelection}.`;
+    message.innerText = `You tied! ${capitalize(playerSelection)} nullifies ${computerSelection}.`;
 }
 
 //Display indivdual round score results
@@ -86,4 +80,3 @@ function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-// game(5);
