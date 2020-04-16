@@ -5,6 +5,9 @@ const playerScore = document.querySelector('.player-score');
 const tieTotal = document.querySelector('.tie-total');
 const compScore = document.querySelector('.comp-score');
 const roundNum = document.querySelector('.round');
+const playerSelectionText = document.querySelector('.player-selection'); 
+const compSelectionText = document.querySelector('.comp-selection');
+const selectionContainer = document.querySelector('.selection-container');
 const playAgain = document.createElement('button');
 playAgain.innerText = "Play again?"
 playAgain.classList.add('play-again');
@@ -17,9 +20,21 @@ let roundCount = 0;
 
 window.addEventListener('click', (e) => {
     
+    console.log(e.target.className);
+
     const playerSelection = e.target.dataset.choice;
     const computerSelection = computerPlay();
     if (!playerSelection) return;
+
+
+    if (e.target.className === 'play-again') {
+        selectionContainer.style.visibility = 'hidden';
+    } else {
+        selectionContainer.style.visibility = 'visible';
+    }
+    
+    playerSelectionText.innerText = playerSelection.toUpperCase();
+    compSelectionText.innerText = computerSelection.toUpperCase();
 
     playRound(playerSelection, computerSelection);
     increaseRoundCount();
@@ -96,11 +111,11 @@ function showGameResults() {
     // playAgain.style.display = 'inline-block';
     
     if (playerWinCount > computerWinCount) {
-        message.innerText = `Congrats! You've won the best of ${roundCount} games!`;
+        message.innerText = `Congrats! \n After ${roundCount} rounds you beat the computer \n ${playerWinCount} to ${computerWinCount}!`;
     } else if (playerWinCount === computerWinCount) {
-        message.innerText = `Womp womp. After ${roundCount} rounds, you tied the computer.`;
+        message.innerText = `Womp womp. After ${roundCount} rounds you \n tied the computer ${playerWinCount} to ${computerWinCount}.`;
     } else {
-        message.innerText = `You've lost the best of ${roundCount} games. Better luck next time.`;
+        message.innerText = `Sorry! After ${roundCount} rounds you lost to the computer ${computerWinCount} to ${playerWinCount}.`;
     }
 }
 
@@ -121,12 +136,8 @@ playAgain.addEventListener('click', () => {
     roundNum.innerText = roundCount;
 
     choices.style.display = 'flex';
+    selectionContainer.style.visibility = 'hidden';
     message.innerText = "Choose your weapon:"
 
     content.removeChild(playAgain);
-
-    
-
-
-
 });

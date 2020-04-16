@@ -107,6 +107,8 @@ body h1 {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    color: #392C9C;
+    visibility: hidden;
 }
 
 .selection {
@@ -119,6 +121,8 @@ body h1 {
     margin-top: -4px;
     text-align: center;
     z-index: 998;
+    min-height: 18px;
+    font-weight: 500;
 }
 
 .content {
