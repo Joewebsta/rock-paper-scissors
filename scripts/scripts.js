@@ -2,6 +2,7 @@ const content = document.querySelector('.content');
 const message = document.querySelector('.message');
 const choices = document.querySelector('.choices');
 const playerScore = document.querySelector('.player-score');
+const tieTotal = document.querySelector('.tie-total');
 const compScore = document.querySelector('.comp-score');
 const roundNum = document.querySelector('.round');
 const playAgain = document.createElement('button');
@@ -11,6 +12,7 @@ playAgain.classList.add('play-again');
 
 let playerWinCount = 0;
 let computerWinCount = 0;
+let tieCount = 0;
 let roundCount = 0;
 
 window.addEventListener('click', (e) => {
@@ -77,6 +79,8 @@ function lose(playerSelection, computerSelection) {
 }
 
 function tie(playerSelection, computerSelection) {
+    tieCount++;
+    tieTotal.innerText = tieCount;
     message.innerText = `You tied! ${capitalize(playerSelection)} nullifies ${computerSelection}.`;
 }
 
@@ -107,10 +111,12 @@ function capitalize(string) {
 
 playAgain.addEventListener('click', () => {
     playerWinCount = 0;
+    tieCount = 0;
     computerWinCount = 0;
     roundCount = 0;
     
     playerScore.innerText = playerWinCount;
+    tieTotal.innerText = tieCount;
     compScore.innerText = computerWinCount;
     roundNum.innerText = roundCount;
 

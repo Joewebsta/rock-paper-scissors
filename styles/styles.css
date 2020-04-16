@@ -23,22 +23,30 @@ body h1 {
 }
 
 .scoreboard {
-    height: 70px;
-    width: 400px;
+    /* height: 70px;
+    width: 400px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scoreboard-section-container {
+    display: flex;
     background-color: #fff;
     border: 4px solid #351253;
     border-radius: 5px;
     margin-bottom: -51px;
     z-index: 999;
-    display: flex;
 }
 
 .scoreboard-section {
     flex: 5;
+    width: 130px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 8px 0;
 }
 
 .scoreboard-section p{
@@ -54,22 +62,43 @@ body h1 {
     margin-bottom: 7px;
 }
 
-.scoreboard-round {
+.scoreboard-player > *, .scoreboard-comp > * {
+    color: #392C9C;
+} 
+
+.scoreboard-tie {
     border-left: 4px solid #351253;
     border-right: 4px solid #351253;
-    flex: 3;
 }
 
+.scoreboard-tie > * {
+    color: #808080
+}
+
+.scoreboard-round {
+    width: 138px;
+    text-align: center;
+    background:  #351253;
+    border-radius: 5px 5px 0 0;
+    padding: 4px 0;
+}
+
+.scoreboard-round > * {
+    display: inline-block;
+    color: white;
+}
 
 .scoreboard-round p {
-    font-size: 28px;
-    font-weight: 900;
-    margin-bottom: 5px;  
+    font-size: 16px;
+    min-width: 10px;
+    font-weight: 500;
+    justify-content: center;
+    /* margin-bottom: 5px;   */
 }
 
 .scoreboard-round h2 {
-    font-size: 14px;
-    font-weight: 900;
+    font-size: 16px;
+    font-weight: 500;
     text-transform: uppercase;
     margin: 0;
 }
