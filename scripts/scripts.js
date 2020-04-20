@@ -18,13 +18,39 @@ let roundCount = 0;
 
 function playGame(e) {
     const playerSelection = e.target.dataset.choice;
-    const computerSelection = computerPlay();
+    const computerSelection = getComputerSelection();
     
     playRound(playerSelection, computerSelection);
     showSelectionContainer(e);
     displaySelectionText(playerSelection, computerSelection);
     increaseRoundCount();
     showGameResults();
+}
+
+function getComputerSelection() {
+    const choices = ["rock", "paper", "scissors"];
+    const randomNuber = Math.floor(Math.random() * 3);
+    return choices[randomNuber];
+}
+
+function playRound(playerSelection, computerSelection) { 
+    
+    switch(playerSelection + computerSelection) {
+        case "rockscissors":
+        case "paperrock":
+        case "scissorspaper":
+            return win(playerSelection, computerSelection);
+
+        case "scissorsrock":
+        case "rockpaper":
+        case "paperscissors":
+            return lose(playerSelection, computerSelection);
+
+        case "scissorsscissors":
+        case "rockrock":
+        case "paperpaper":
+            return tie(playerSelection, computerSelection);
+    }
 }
 
 function showSelectionContainer(e) {
@@ -40,40 +66,9 @@ function displaySelectionText(playerSelection, computerSelection) {
     compSelectionText.innerText = computerSelection.toUpperCase();
 }
 
-
 function increaseRoundCount() {
     roundCount++;
     roundNum.textContent = roundCount;
-}
-
-function computerPlay() {
-    const choices = ["rock", "paper", "scissors"];
-    const randomNuber = Math.floor(Math.random() * 3);
-    return choices[randomNuber];
-}
-
-//Play round and compare user and computer selections to determine winner
-function playRound(playerSelection, computerSelection) { 
-    
-    switch(playerSelection + computerSelection) {
-        //user win scenarios
-        case "rockscissors":
-        case "paperrock":
-        case "scissorspaper":
-            return win(playerSelection, computerSelection);
-
-        //user lose scenarios
-        case "scissorsrock":
-        case "rockpaper":
-        case "paperscissors":
-            return lose(playerSelection, computerSelection);
-
-        //user tie scenarrios
-        case "scissorsscissors":
-        case "rockrock":
-        case "paperpaper":
-            return tie(playerSelection, computerSelection);
-    }
 }
 
 //Determine text for individual round results
@@ -112,37 +107,35 @@ function showGameResults() {
     }
 }
 
-//Helper method
-function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-playAgain.addEventListener('click', () => {
+function resetGame() {
     playerWinCount = 0;
     tieCount = 0;
     computerWinCount = 0;
     roundCount = 0;
     
-    playerScore.innerText = playerWinCount;
-    tieTotal.innerText = tieCount;
-    compScore.innerText = computerWinCount;
-    roundNum.innerText = roundCount;
+    playerScore.innerText = 0;
+    tieTotal.innerText = 0;
+    compScore.innerText = 0;
+    roundNum.innerText = '-';
 
     choicesContainer.style.display = 'flex';
     selectionContainer.style.visibility = 'hidden';
-    message.innerText = "Choose your weapon:"
+    message.innerText = "Choose your weapon:";
 
     rpsContainer.removeChild(playAgain);
-});
-
+}
 
 function createPlayAgainBtn() {
     const btn = document.createElement('button');
-    btn.innerText = "Play again?"
+    btn.innerText = "Play again?";
     btn.classList.add('play-again');
     return btn;
 }
 
-
+//Helper method
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 choiceIcons.forEach(choice => choice.addEventListener('click', playGame));
+playAgain.addEventListener('click', resetGame);
