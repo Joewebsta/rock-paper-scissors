@@ -1,6 +1,7 @@
-const content = document.querySelector('.content');
+const rpsContainer = document.querySelector('.rps-container');
 const message = document.querySelector('.message');
-const choices = document.querySelector('.choices');
+const choicesContainer = document.querySelector('.choices-container');
+const choiceIcons = document.querySelectorAll('.choice img');
 const playerScore = document.querySelector('.player-score');
 const tieTotal = document.querySelector('.tie-total');
 const compScore = document.querySelector('.comp-score');
@@ -8,41 +9,36 @@ const roundNum = document.querySelector('.round');
 const playerSelectionText = document.querySelector('.player-selection'); 
 const compSelectionText = document.querySelector('.comp-selection');
 const selectionContainer = document.querySelector('.selection-container');
-const playAgain = document.createElement('button');
-playAgain.innerText = "Play again?"
-playAgain.classList.add('play-again');
-
+const playAgain = createPlayAgainBtn();
 
 let playerWinCount = 0;
 let computerWinCount = 0;
 let tieCount = 0;
 let roundCount = 0;
 
-window.addEventListener('click', (e) => {
-    
-    console.log(e.target.className);
-
+function playGame(e) {
     const playerSelection = e.target.dataset.choice;
     const computerSelection = computerPlay();
-    if (!playerSelection) return;
+    
+    playRound(playerSelection, computerSelection);
+    showSelectionContainer(e);
+    displaySelectionText(playerSelection, computerSelection);
+    increaseRoundCount();
+    showGameResults();
+}
 
-
+function showSelectionContainer(e) {
     if (e.target.className === 'play-again') {
         selectionContainer.style.visibility = 'hidden';
     } else {
         selectionContainer.style.visibility = 'visible';
     }
-    
+}
+
+function displaySelectionText(playerSelection, computerSelection) {
     playerSelectionText.innerText = playerSelection.toUpperCase();
     compSelectionText.innerText = computerSelection.toUpperCase();
-
-    playRound(playerSelection, computerSelection);
-    increaseRoundCount();
-    
-    if (roundCount === 5) {
-        showGameResults();
-    }
-});
+}
 
 
 function increaseRoundCount() {
@@ -99,23 +95,20 @@ function tie(playerSelection, computerSelection) {
     message.innerText = `You tied! ${capitalize(playerSelection)} nullifies ${computerSelection}.`;
 }
 
-//Display indivdual round score results
-function showRoundResults() {
-    return `Player score: ${playerWinCount} Computer score: ` + `${computerWinCount}`;
-}
-
 //Display game's final score results
 function showGameResults() {
-    choices.style.display = 'none';
-    content.appendChild(playAgain);
-    // playAgain.style.display = 'inline-block';
+    if (roundCount === 5) {
     
-    if (playerWinCount > computerWinCount) {
-        message.innerText = `Congrats! \n After ${roundCount} rounds you beat the computer \n ${playerWinCount} to ${computerWinCount}!`;
-    } else if (playerWinCount === computerWinCount) {
-        message.innerText = `Womp womp. After ${roundCount} rounds you \n tied the computer ${playerWinCount} to ${computerWinCount}.`;
-    } else {
-        message.innerText = `Sorry! After ${roundCount} rounds you lost to the computer ${computerWinCount} to ${playerWinCount}.`;
+        choicesContainer.style.display = 'none';
+        rpsContainer.appendChild(playAgain);
+   
+        if (playerWinCount > computerWinCount) {
+            message.innerText = `Congrats! \n After ${roundCount} rounds you beat the computer \n ${playerWinCount} to ${computerWinCount}!`;
+        } else if (playerWinCount === computerWinCount) {
+            message.innerText = `Womp womp. After ${roundCount} rounds you \n tied the computer ${playerWinCount} to ${computerWinCount}.`;
+        } else {
+            message.innerText = `Sorry! After ${roundCount} rounds you lost to the computer ${playerWinCount} to ${computerWinCount}.`;
+        }
     }
 }
 
@@ -135,9 +128,21 @@ playAgain.addEventListener('click', () => {
     compScore.innerText = computerWinCount;
     roundNum.innerText = roundCount;
 
-    choices.style.display = 'flex';
+    choicesContainer.style.display = 'flex';
     selectionContainer.style.visibility = 'hidden';
     message.innerText = "Choose your weapon:"
 
-    content.removeChild(playAgain);
+    rpsContainer.removeChild(playAgain);
 });
+
+
+function createPlayAgainBtn() {
+    const btn = document.createElement('button');
+    btn.innerText = "Play again?"
+    btn.classList.add('play-again');
+    return btn;
+}
+
+
+
+choiceIcons.forEach(choice => choice.addEventListener('click', playGame));
